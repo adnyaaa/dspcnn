@@ -1,0 +1,98 @@
+PLOT 1
+Tentu, mari saya jelaskan setiap bagian dari kode tersebut:
+
+1. `plt.figure(figsize=(10, 3))`: Baris ini membuat sebuah figure baru menggunakan Matplotlib dengan ukuran 10x3 inch. Figure ini akan berisi plot-box untuk setiap kolom numerik.
+
+2. `for i in range(0, len(kolom_numerik)):`: Looping ini akan berjalan sebanyak jumlah kolom numerik yang ada dalam dataset. Ini akan memungkinkan kita untuk membuat subplot untuk setiap kolom numerik.
+
+3. `plt.subplot(1, len(kolom_numerik), i+1)`: Dalam setiap iterasi loop, kita membuat sebuah subplot. Subplot disusun dalam satu baris dan sejumlah kolom numerik yang ada. `i+1` digunakan karena indeks subplot dimulai dari 1, bukan 0.
+
+4. `sns.boxplot(y=data[kolom_numerik[i]], color='skyblue', orient='v')`: Di dalam setiap subplot, kita membuat box plot menggunakan Seaborn. Kita menggunakan data dari kolom numerik yang sedang dieksplorasi. `color='skyblue'` mengatur warna plot-box menjadi biru langit, dan `orient='v'` menetapkan orientasi box plot menjadi vertikal.
+
+5. `plt.title(kolom_numerik[i])`: Setiap subplot diberi judul dengan nama kolom numerik yang sesuai agar mudah dikenali.
+
+6. `plt.tight_layout()`: Ini digunakan untuk mengatur tata letak subplot agar tidak tumpang tindih.
+
+7. `plt.show()`: Setelah semua subplot dibuat, kita menampilkan figure secara keseluruhan dengan menggunakan `plt.show()`.
+
+Dengan menggunakan kode ini, kita dapat dengan mudah membuat box plot untuk setiap kolom numerik dalam dataset kita, memungkinkan kita untuk memahami distribusi data secara visual.
+
+
+PLOT 2
+kernel density estimate (KDE) plot. Plot ini sebenarnya menyerupai histogram, namun dengan bentuk yang diperhalus karena menampilkan nilai setiap sampel sehingga membentuk kurva gaussian.
+Mari kita jelaskan setiap bagian dari kedua potongan kode tersebut:
+
+### Potongan Kode Pertama:
+```python
+feature = numerical
+
+plt.figure(figsize=(10,4))
+for i in range(0, len(feature)):
+    plt.subplot(2,4, i+1)
+    sns.kdeplot(x=data[feature[i]], color='skyblue')
+    plt.xlabel(feature[i])
+    plt.tight_layout()
+```
+
+1. `feature = numerical`: Mendefinisikan `feature` sebagai daftar kolom numerik yang ingin divisualisasikan.
+
+2. `plt.figure(figsize=(10,4))`: Membuat sebuah figure baru dengan ukuran 10x4 inch. Ini akan berisi plot KDE untuk setiap kolom numerik.
+
+3. `for i in range(0, len(feature)):`: Looping ini akan berjalan sebanyak jumlah kolom numerik yang ada dalam `feature`.
+
+4. `plt.subplot(2,4, i+1)`: Membuat sebuah subplot dengan jumlah baris 2 dan kolom 4. Setiap kolom numerik akan ditampilkan dalam subplot ini.
+
+5. `sns.kdeplot(x=data[feature[i]], color='skyblue')`: Di setiap subplot, sebuah plot KDE (Kernel Density Estimation) dibuat menggunakan Seaborn. Ini digunakan untuk menggambarkan distribusi probabilitas dari data numerik.
+
+6. `plt.xlabel(feature[i])`: Menambahkan label sumbu x pada plot KDE dengan nama kolom numerik yang sesuai.
+
+7. `plt.tight_layout()`: Mengatur tata letak subplot agar tidak tumpang tindih.
+
+
+Usia (Age): Grafik usia menunjukkan distribusi usia responden. Terlihat bahwa distribusi usia cenderung muda, dengan puncak di sekitar 25-30 tahun.
+Saldo (Balance): Grafik saldo menunjukkan distribusi saldo akun. Sebagian besar data terkonsentrasi di sekitar nilai nol, menandakan banyak akun dengan saldo rendah.
+Hari (Day): Grafik hari menunjukkan frekuensi kontak berdasarkan hari dalam bulan. Terdapat beberapa puncak, menunjukkan variasi frekuensi kontak pada hari-hari tertentu.
+Durasi (Duration): Grafik durasi menunjukkan distribusi durasi kontak. Mayoritas durasi kontak pendek, dengan puncak di sekitar nilai rendah.
+Kampanye (Campaign): Grafik kampanye menunjukkan frekuensi kontak selama kampanye pemasaran. Mayoritas kampanye memiliki kurang dari 10 kontak, menandakan distribusi yang condong ke nilai rendah.
+Pdays: Grafik pdays menunjukkan frekuensi kontak sebelumnya terhadap nasabah. Terdapat puncak pada nilai nol, menandakan banyak nasabah yang belum pernah dihubungi sebelumnya atau sudah lama tidak dihubungi.
+Previous: Grafik previous menunjukkan frekuensi kontak sebelumnya secara keseluruhan. Puncak pada nilai nol menandakan banyak nasabah yang belum pernah dihubungi sebelumnya.
+
+
+
+
+
+
+
+### Potongan Kode Ketiga
+```python
+feature = numerical
+
+plt.figure(figsize=(10,3))
+for i in range(0,len(feature)):
+    plt.subplot(1, len(feature), i+1)
+    sns.violinplot(y=data[feature[i]], color='skyblue')
+    plt.tight_layout()
+```
+
+1. `feature = numerical`: Sama seperti sebelumnya, mendefinisikan `feature` sebagai daftar kolom numerik yang ingin divisualisasikan.
+
+2. `plt.figure(figsize=(10,3))`: Membuat sebuah figure baru dengan ukuran 10x3 inch. Ini akan berisi plot violin untuk setiap kolom numerik.
+
+3. `for i in range(0,len(feature)):`: Looping ini akan berjalan sebanyak jumlah kolom numerik yang ada dalam `feature`.
+
+4. `plt.subplot(1, len(feature), i+1)`: Membuat sebuah subplot dengan satu baris dan sejumlah kolom yang sama dengan jumlah kolom numerik. Setiap kolom numerik akan ditampilkan dalam subplot ini.
+
+5. `sns.violinplot(y=data[feature[i]], color='skyblue')`: Di setiap subplot, sebuah plot violin dibuat menggunakan Seaborn. Plot violin adalah metode visualisasi yang menampilkan distribusi data numerik.
+
+6. `plt.tight_layout()`: Mengatur tata letak subplot agar tidak tumpang tindih.
+
+
+Usia (Age): Grafik usia menunjukkan distribusi usia responden. Terlihat bahwa distribusi usia cenderung muda, dengan puncak di sekitar 25 hingga 60 tahun.
+Saldo (Balance): Grafik saldo menunjukkan distribusi saldo akun. Sebagian besar data terkonsentrasi di sekitar nilai nol, menandakan banyak akun dengan saldo rendah.
+Hari (Day): Grafik hari menunjukkan frekuensi kontak berdasarkan hari dalam bulan. Terdapat beberapa puncak, menunjukkan variasi frekuensi kontak pada hari-hari tertentu.
+Durasi (Duration): Grafik durasi menunjukkan distribusi durasi kontak. Mayoritas durasi kontak pendek, dengan puncak di sekitar nilai rendah.
+Kampanye (Campaign): Grafik kampanye menunjukkan frekuensi kontak selama kampanye pemasaran. Mayoritas kampanye memiliki kurang dari 10 kontak, menandakan distribusi yang condong ke nilai rendah.
+Pdays: Grafik pdays menunjukkan frekuensi kontak sebelumnya terhadap nasabah. Terdapat puncak pada nilai nol, menandakan banyak nasabah yang belum pernah dihubungi sebelumnya atau sudah lama tidak dihubungi.
+Previous: Grafik previous menunjukkan frekuensi kontak sebelumnya secara keseluruhan. Puncak pada nilai nol menandakan banyak nasabah yang belum pernah dihubungi sebelumnya.
+
+Dengan menggunakan kedua potongan kode ini, Anda dapat membuat plot KDE dan plot violin untuk setiap kolom numerik dalam dataset Anda, memungkinkan Anda untuk memahami distribusi data secara visual.

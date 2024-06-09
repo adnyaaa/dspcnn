@@ -1,0 +1,77 @@
+Tentu, berikut adalah susunan kata-kata yang dapat Anda gunakan untuk menjelaskan langkah-langkah tersebut dalam presentasi:
+
+---
+
+**Langkah 1: Mengimpor Modul dan Library yang Diperlukan**
+
+Untuk memulai analisis data, pertama-tama kita perlu mengimpor modul dan library yang diperlukan. Ini termasuk numpy, pandas, serta seaborn untuk visualisasi.
+
+```python
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+```
+
+**Langkah 2: Inisialisasi Data**
+
+Data yang akan dianalisis dapat berasal dari berbagai sumber, seperti file CSV. Kita dapat membaca data dari file CSV dan memisahkan nilainya berdasarkan delimiter tertentu, seperti titik koma.
+
+```python
+data = pd.read_csv('nama_file.csv', sep=';')
+```
+
+**Langkah 3: Melihat Data**
+
+Setelah data dimuat, langkah selanjutnya adalah memahami struktur dan konten data. Kita dapat melihat nilai teratas dan terbawah dari data menggunakan fungsi `head()` dan `tail()`.
+
+```python
+print("Nilai teratas data:")
+print(data.head())
+
+print("\nNilai terbawah data:")
+print(data.tail())
+```
+
+**Langkah 4: Informasi Tipe Data**
+
+Untuk mendapatkan pemahaman yang lebih mendalam tentang data, kita dapat mengecek informasi tentang tipe data dan jumlah non-null menggunakan fungsi `info()`.
+
+```python
+print("\nInformasi tipe data:")
+print(data.info())
+```
+
+**Langkah 5: Pembagian Kolom**
+
+Agar lebih mudah untuk melakukan visualisasi, kita dapat membagi kolom-kolom data ke dalam dua kategori, yaitu kategori dan numerik.
+
+```python
+kolom_kategori = []  # Kolom kategori
+kolom_numerik = []   # Kolom numerik
+
+for col in data.columns:
+    if data[col].dtype == 'object':
+        kolom_kategori.append(col)
+    else:
+        kolom_numerik.append(col)
+```
+
+**Langkah 6: Visualisasi Kolom Numerik**
+
+Visualisasi adalah cara yang baik untuk memahami distribusi data. Kita dapat menggunakan box plot untuk mengeksplorasi kolom-kolom yang bersifat numerik.
+
+```python
+plt.figure(figsize=(10, 3))
+for i in range(0, len(kolom_numerik)):
+    plt.subplot(1, len(kolom_numerik), i+1)
+    sns.boxplot(y=data[kolom_numerik[i]], color='skyblue', orient='v')
+    plt.title(kolom_numerik[i])
+    plt.tight_layout()
+
+plt.show()
+```
+
+---
+
+Anda dapat mengadaptasi kata-kata ini sesuai dengan gaya presentasi dan penekanan yang Anda inginkan. Semoga membantu! Jika ada pertanyaan lebih lanjut, jangan ragu untuk bertanya.
