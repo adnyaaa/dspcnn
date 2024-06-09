@@ -8,13 +8,11 @@ from tensorflow.keras.models import load_model
 
 # Labels
 labels_2_class = ['Healthy', 'Parkinson']
-labels_3_class1 = ['Healthy', 'Parkinson', 'Random']
-labels_3_class2 = ['Healthy', 'Parkinson', 'Random']
+labels_3_class = ['Healthy', 'Parkinson', 'Random']
 
 # Load models
-model_2_class = load_model('parkinsonhealthy.h5')
+model_2_class = load_model('parkinson_modelnormal957.h5')
 model_3_class = load_model('withrandom.h5')
-model_3_class2 = load_model('withrandom3.h5')
 
 # Streamlit UI
 st.title('Use the Model for Prediction')
@@ -60,19 +58,10 @@ if uploaded_file is not None:
     try:
         prediction_3_class = model_3_class.predict(x)
         st.write("3-Class Model (random) raw prediction:", prediction_3_class)  # Debug output
-        predicted_class_3_class1 = labels_3_class1[np.argmax(prediction_3_class)]
+        predicted_class_3_class = labels_3_class[np.argmax(prediction_3_class)]
     except Exception as e:
         st.write("Error in 3-Class Model (random) prediction:", e)
-        predicted_class_3_class1 = 'Error'
-
-    # Prediction for model 3 class with 'Random' (model 3_class2)
-    try:
-        prediction_3_class2 = model_3_class2.predict(x)
-        st.write("3-Class Model (random) raw prediction:", prediction_3_class2)  # Debug output
-        predicted_class_3_class2 = labels_3_class2[np.argmax(prediction_3_class2)]
-    except Exception as e:
-        st.write("Error in 3-Class Model (random) prediction:", e)
-        predicted_class_3_class2 = 'Error'
+        predicted_class_3_class = 'Error'
 
     # Display results for 2-Class Model
     st.subheader('2-Class Model Prediction')
@@ -88,29 +77,15 @@ if uploaded_file is not None:
         plt.tight_layout()
         st.pyplot(fig)
 
-    # Display results for 3-Class Model with 'Random' (model 3_class)
+    # Display results for 3-Class Model with 'Random'
     st.subheader('3-Class Model Prediction (random)')
-    st.write(f'The predicted class is: {predicted_class_3_class1}')
+    st.write(f'The predicted class is: {predicted_class_3_class}')
 
-    if predicted_class_3_class1 != 'Error':
+    if predicted_class_3_class != 'Error':
         st.subheader('3-Class Model Predicted Output Chart (random)')
         probabilities_3_class = prediction_3_class[0]
         fig, ax = plt.subplots(figsize=(8, 5))
-        sns.barplot(x=labels_3_class1, y=probabilities_3_class, palette='viridis')
-        ax.set_title('Predicted Class Probabilities')
-        ax.set_ylabel('Probability')
-        plt.tight_layout()
-        st.pyplot(fig)
-
-    # Display results for 3-Class Model with 'Random' (model 3_class2)
-    st.subheader('3-Class Model Prediction (random)')
-    st.write(f'The predicted class is: {predicted_class_3_class2}')
-
-    if predicted_class_3_class2 != 'Error':
-        st.subheader('3-Class Model Predicted Output Chart (random)')
-        probabilities_3_class2 = prediction_3_class2[0]
-        fig, ax = plt.subplots(figsize=(8, 5))
-        sns.barplot(x=labels_3_class2, y=probabilities_3_class2, palette='viridis')
+        sns.barplot(x=labels_3_class, y=probabilities_3_class, palette='viridis')
         ax.set_title('Predicted Class Probabilities')
         ax.set_ylabel('Probability')
         plt.tight_layout()
